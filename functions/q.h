@@ -11,8 +11,16 @@
 
 
 
-
-
+float calc_irLeft();
+float calc_irRight();
+void turnRight();
+void turnLeft();
+void turnAround();
+void goDown(int facing,int distance);
+void goUp(int facing,int distance);
+void goLeft(int facing,int distance);
+void goRight(int facing,int distance);
+void move (int x);
 
 /*
 float calc_irLeft();

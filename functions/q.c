@@ -8,27 +8,12 @@
 
 
 // 1.1 visit all the maze
-// 1.2 store data 
-// 2.1 make the tree
-// 2.2 find the opposite corner
 // 2.3 drive to finish
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-/*
 float calc_irLeft()         //calculating the distances
 {
   float irLeft=0;
@@ -43,7 +28,6 @@ float calc_irLeft()         //calculating the distances
     
   return irLeft;
 }
-
 
 float calc_irRight()        //calculating the distances
 {
@@ -61,7 +45,101 @@ float calc_irRight()        //calculating the distances
 }
 
 
+void turnRight()
+{
+    drive_goto(26,-25);
+}
 
+void turnLeft()
+{
+    drive_goto(-26,25);
+}
+
+void turnAround()
+{
+    drive_goto(51,-51); 
+}
+
+
+void goDown(int facing,int distance)
+{
+ if (facing==2)
+ turnRight();
+ else if (facing==3)
+ turnLeft();
+ else if (facing==4)
+  turnAround();
+ move(distance);
+
+}
+
+void goUp(int facing,int distance)
+{
+ if (facing==1)
+ turnAround();
+ else if (facing==2)
+ turnLeft();
+ else if (facing==3)
+ turnRight();
+ move(distance);
+}
+
+void goLeft(int facing,int distance)
+{
+ if (facing==1)
+ turnRight();  
+ else if (facing==2)
+ turnAround();
+ else if (facing==4)
+ turnLeft();
+  move(distance)
+}
+
+void goRight(int facing,int distance)
+{
+ if (facing==1)
+ turnLeft();
+ else if (facing==3) 
+ turnAround();
+ else if (facing==4)
+ turnLeft();
+ move(distance)
+}
+
+void move (int x) // 1 for move forward, -1 for move backwards etc.
+{
+    if(x>0) for(int count=1; count <=x; count++)
+    {
+      drive_speed(41, 41);
+      pause(100);
+      if( getleftdistance() < 7 ) drive_speed(43, 41);
+      if( getrightdistance() < 7) drive_speed(41, 43);
+      pause(100);
+      if( getleftdistance() < 7 ) drive_speed(43, 41);
+      else if( getrightdistance() < 7) drive_speed(41, 43);
+      else drive_speed(41, 41);
+      pause(100);
+    }
+    else for(int count=-1; count >=x; count--)
+    {
+      drive_speed(-41, -41);
+      pause(100);
+      if( getleftdistance() < 7) drive_speed(-43, -41);
+      if( getrightdistance() < 7) drive_speed(-41, -43);
+      pause(100);
+      if( getleftdistance() < 7) drive_speed(-43, -41);
+      else if( getrightdistance() < 7) drive_speed(-41, -43);
+      else drive_speed(-41, -41);
+      pause(100);
+    }
+    drive_speed(0,0);
+}
+
+
+
+
+
+/*
 
 int walk_back()
 {
